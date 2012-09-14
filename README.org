@@ -1,0 +1,4 @@
+				README
+
+* How to run block-mult
+  ./bin/block-mult 1 < test-files/test-file-1.txt 

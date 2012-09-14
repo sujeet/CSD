@@ -1,0 +1,27 @@
+			Cache Simulator Notes
+
+* Performance
+* Cache simulator
+** Design a cache simulator that takes in a memory trace and simulates the behaviour of a real cache
+** Cache parameters
+*** cache line size (ie. block size)
+*** cache size
+*** organization
+** Cache configuration (from http://cseweb.ucsd.edu/classes/fa07/cse240a/project1.html)
+*** line size (in bytes, as a non-negative power of 2)
+*** associativity (1 = direct-mapped, 0 = fully associative, 2^N)
+*** data size (2^N KB)
+*** replacement policy (0 = Random replacement, 1 = LRU)
+*** miss penalty (Number of cycles missed on cache misses)
+*** TODO write allocate (???) 
+** Trace file format (from http://cseweb.ucsd.edu/classes/fa07/cse240a/project1.html)
+*** Load or Store
+*** Hex address
+*** Number of instructions since last memory access
+** Keep count of total number of cache accesses
+** Report cold, capacity, and conflict misses
+** Compare with s = 1 (naive matrix multiplication)
+* Memory trace generator
+** Given a program, generate its memory trace.
+* Matrix multiplication program (size n, blocking factor s)
+
