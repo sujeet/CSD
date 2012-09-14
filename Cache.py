@@ -213,7 +213,7 @@ class Cache (object) :
                 + self.getCumulativeCount ('conflict_miss_count'))
         total = self.getCumulativeCount ('access_count')
         print ("Hit Rate : "
-               + str (round (100 - float (miss) / total, 3))
+               + str (round (100 * (1 - float (miss) / total), 3))
                + "%")
 
     def getCumulativeCount (self, attr_name) :

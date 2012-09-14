@@ -3,3 +3,5 @@
 #*
 *#
 bin/*
+*.pyc
+mem-trace.txt

@@ -24,4 +24,14 @@
 * Memory trace generator
 ** Given a program, generate its memory trace.
 * Matrix multiplication program (size n, blocking factor s)
-
+* Why is block multiplication faster?
+** http://www.netlib.org/utk/papers/autoblock/node2.html
+* Permutations 
+** all caches (4 types)
+** write_no_allocate (true/false)
+** block_size (1K, 4K, 10K)
+** Matrix size (10, ..., 1000, 5000, 10000)
+** block size (ie. block factor indirectly)
+** ways (1, 4, 16, #blocks in cache)
+* Find out where the default accesses end
+* Generate matrices of different sizes and put them in files
