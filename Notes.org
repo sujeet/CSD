@@ -35,3 +35,18 @@
 ** ways (1, 4, 16, #blocks in cache)
 * TODO Find out where the default accesses end
 * TODO Generate matrices of different sizes and put them in files
+* TODO Use a temporary sub-matrices in the inner block multiplication and then write it back to the result matrix.
+* TODO Convert all method names from CamelCase to lower_case.
+* Statistics
+** Note: We'll just take one representative cache size and one block size and one value of number of sets and write_no_allocate = True
+** For each Cache type
+*** For different blocking factors
+**** For different matrix sizes
+** And maybe one showing different cache types on the same value of blocking factor
+* Graph
+** X-axis: Matrix size
+** Y-axis: Conflict miss rate
+** Output format
+*** for each cache type
+**** for each blocking factor
+***** (matrix size, conflict miss rate)
