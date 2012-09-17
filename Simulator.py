@@ -200,6 +200,7 @@ if __name__ == "__main__":
     ways_list = [4]
     # ways_list = [1, 4, 16]
 
+    # TODO: Maybe read this from a file?
     blocking_factor_list = [1, 2, 4, 8, 16]
     matrix_size_list = range (16, 100, 16)
 
