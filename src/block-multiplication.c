@@ -129,14 +129,16 @@ int main(int argc, char *argv[])
         }
     }
 
-    printf ("First matrix:\n");
-    print_matrix (A, matrix_size, matrix_size);
-    printf ("Second matrix:\n");
-    print_matrix (B, matrix_size, matrix_size);
+    /* printf ("First matrix:\n"); */
+    /* print_matrix (A, matrix_size, matrix_size); */
+    /* printf ("Second matrix:\n"); */
+    /* print_matrix (B, matrix_size, matrix_size); */
 
     int **C = block_matrix_product (A, B, matrix_size, blocking_factor);
-    printf ("Product:\n");
-    print_matrix (C, matrix_size, matrix_size);
+    /* Note: We don't need the output to be printed. We just want the
+       computation to happen. */
+    /* printf ("Product:\n"); */
+    /* print_matrix (C, matrix_size, matrix_size); */
     return 0;
 }
 

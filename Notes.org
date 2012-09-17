@@ -34,9 +34,10 @@
 ** block size (ie. block factor indirectly)
 ** ways (1, 4, 16, #blocks in cache)
 * TODO Find out where the default accesses end
-* TODO Generate matrices of different sizes and put them in files
+* DONE Generate matrices of different sizes and put them in files
 * TODO Use a temporary sub-matrices in the inner block multiplication and then write it back to the result matrix.
 * TODO Convert all method names from CamelCase to lower_case.
+* TODO Maybe don't get the matrix input from elsewhere cos it would take time to do I/O. Instead just generate the matrix of appropriate size and fill it up in allocate_matrix.
 * Statistics
 ** Note: We'll just take one representative cache size and one block size and one value of number of sets and write_no_allocate = True
 ** For each Cache type

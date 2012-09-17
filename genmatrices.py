@@ -34,9 +34,7 @@ if __name__ == '__main__':
     # from.
     blocking_factor_list = [1, 2, 4, 8, 16]
     matrix_size_list = range (16, 100, 16)
-    for blocking_factor in blocking_factor_list:
-        for matrix_size in matrix_size_list:
-            write_matrices_to_file (
-                'matrix-input-{0}-{1}.txt'.format (
-                    matrix_size, blocking_factor), 
-                gen_matrix_inputs (matrix_size, blocking_factor))
+    for matrix_size in matrix_size_list:
+        write_matrices_to_file (
+            'matrix-input-{0}.txt'.format (matrix_size), 
+            gen_matrix_inputs (matrix_size, 2))
