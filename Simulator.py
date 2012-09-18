@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 import getopt
-import matplotlib.pyplot as plot
+# import matplotlib.pyplot as plot
 import sys
 
 from Cache import *
@@ -76,11 +76,21 @@ def simulate (cache, memtrace):
 def genMemtrace (filename):
     """ Returns a list of pairs, [r/w, addr] """
     tracefile = open (filename)
-    trace = [tuple(line.strip().split()) for
-             line in tracefile.readlines()]
-    trace = [pair for pair in trace if len (pair) == 2]
+    line = tracefile.readline ()
+    while line :
+        yield tuple (line.strip().split())
+        line = tracefile.readline ()
     tracefile.close ()
-    return trace
+    # trace = [tuple(line.strip().split()) for
+    #          line in tracefile.readlines()]
+    # trace = [pair for pair in trace if len (pair) == 2]
+    # tracefile.close ()
+    # return trace
+
+def genSampleAddr(filename):
+    tracefile = open (filename)
+    line = tracefile.readline ()
+    return line.strip().split() [1]
 
 def ye_old_simulation_attempt ():
     """Simulation attempt with lotsa combos of block size and #ways and whatnot.
@@ -188,53 +198,53 @@ if __name__ == "__main__":
     # readOptions (sys.argv [1:])
     file_name = 'sample-mem-trace.txt'
     memtrace = genMemtrace (file_name)
-    sample_addr = memtrace [0][1]
+    sample_addr = genSampleAddr (file_name)
 
-    cache_list = [Cache, FIFOCache, LRUCache, LFUCache]
-    true_false_list = [True, False]
-    # matrix_size_list = range (10, 60, 10) # + [100]
-    cache_size_list = [1048576]
-    # cache_size_list = [524288, 1048576]
-    block_size_list = [16]
-    # block_size_list = [1, 4, 16]
-    ways_list = [4]
-    # ways_list = [1, 4, 16]
+    # cache_list = [Cache, FIFOCache, LRUCache, LFUCache]
+    # true_false_list = [True, False]
+    # # matrix_size_list = range (10, 60, 10) # + [100]
+    # cache_size_list = [1048576]
+    # # cache_size_list = [524288, 1048576]
+    # block_size_list = [16]
+    # # block_size_list = [1, 4, 16]
+    # ways_list = [4]
+    # # ways_list = [1, 4, 16]
 
-    # TODO: Maybe read this from a file?
-    blocking_factor_list = [1, 2, 4, 8, 16]
-    matrix_size_list = range (16, 100, 16)
+    # # TODO: Maybe read this from a file?
+    # blocking_factor_list = [1, 2, 4, 8, 16]
+    # matrix_size_list = range (16, 100, 16)
 
-    if len (sys.argv) != 2:
-        print 'Enter exactly 1 argument out of:\nplot\nsimulate\nsimulate_all\n'
-        exit (1)
+    # if len (sys.argv) != 2:
+    #     print 'Enter exactly 1 argument out of:\nplot\nsimulate\nsimulate_all\n'
+    #     exit (1)
 
-    if sys.argv[1] == 'simulate':
-        output_dict = {}
-        for cache_type in cache_list:
-            output_dict[cache_type] = {}
-            cache_size = cache_size_list[-1]
-            block_size = block_size_list[-1]
-            num_ways = ways_list[-1]
-            cache = cache_type ((cache_size / block_size) / num_ways,
-                                num_ways,
-                                block_size,
-                                sample_addr,
-                                write_no_allocate = True)
-            for blocking_factor in blocking_factor_list:
-                output_dict[cache_type][blocking_factor] = []
-                for matrix_size in matrix_size_list:
-                    # TODO: Have actual memtraces in these files
-                    memtrace = genMemtrace ('memtrace-{0}-{1}.txt'.format (
-                        matrix_size, blocking_factor))
-                    simulate (cache, memtrace)
-                    output_dict[cache_type][blocking_factor].append (
-                        (matrix_size, cache.getHitRate ()))
-                # print output_dict[cache_type][blocking_factor]
-                write_result_to_file (
-                    'results-{0}-{1}.txt'.format (cache_type.__name__, blocking_factor),
-                    output_dict[cache_type][blocking_factor])
-    elif sys.argv[1] == 'plot':
-        plot_cache_graphs (cache_list, blocking_factor_list)
-    elif sys.argv[1] == 'simulate_all':
-        ye_old_simulation_attempt ()
+    # if sys.argv[1] == 'simulate':
+    #     output_dict = {}
+    #     for cache_type in cache_list:
+    #         output_dict[cache_type] = {}
+    #         cache_size = cache_size_list[-1]
+    #         block_size = block_size_list[-1]
+    #         num_ways = ways_list[-1]
+    #         cache = cache_type ((cache_size / block_size) / num_ways,
+    #                             num_ways,
+    #                             block_size,
+    #                             sample_addr,
+    #                             write_no_allocate = True)
+    #         for blocking_factor in blocking_factor_list:
+    #             output_dict[cache_type][blocking_factor] = []
+    #             for matrix_size in matrix_size_list:
+    #                 # TODO: Have actual memtraces in these files
+    #                 memtrace = genMemtrace ('memtrace-{0}-{1}.txt'.format (
+    #                     matrix_size, blocking_factor))
+    #                 simulate (cache, memtrace)
+    #                 output_dict[cache_type][blocking_factor].append (
+    #                     (matrix_size, cache.getHitRate ()))
+    #             # print output_dict[cache_type][blocking_factor]
+    #             write_result_to_file (
+    #                 'results-{0}-{1}.txt'.format (cache_type.__name__, blocking_factor),
+    #                 output_dict[cache_type][blocking_factor])
+    # elif sys.argv[1] == 'plot':
+    #     plot_cache_graphs (cache_list, blocking_factor_list)
+    # elif sys.argv[1] == 'simulate_all':
+    #     ye_old_simulation_attempt ()
 
