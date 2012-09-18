@@ -247,4 +247,3 @@ if __name__ == "__main__":
         plot_cache_graphs (cache_list, blocking_factor_list)
     elif sys.argv[1] == 'simulate_all':
         ye_old_simulation_attempt ()
-
