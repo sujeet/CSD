@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 import getopt
-import matplotlib.pyplot as plot
+# import matplotlib.pyplot as plot
 import sys
 
 from Cache import *
@@ -76,11 +76,21 @@ def simulate (cache, memtrace):
 def genMemtrace (filename):
     """ Returns a list of pairs, [r/w, addr] """
     tracefile = open (filename)
-    trace = [tuple(line.strip().split()) for
-             line in tracefile.readlines()]
-    trace = [pair for pair in trace if len (pair) == 2]
+    line = tracefile.readline ()
+    while line :
+        yield tuple (line.strip().split())
+        line = tracefile.readline ()
     tracefile.close ()
-    return trace
+    # trace = [tuple(line.strip().split()) for
+    #          line in tracefile.readlines()]
+    # trace = [pair for pair in trace if len (pair) == 2]
+    # tracefile.close ()
+    # return trace
+
+def genSampleAddr(filename):
+    tracefile = open (filename)
+    line = tracefile.readline ()
+    return line.strip().split() [1]
 
 def ye_old_simulation_attempt ():
     """Simulation attempt with lotsa combos of block size and #ways and whatnot.
@@ -188,7 +198,7 @@ if __name__ == "__main__":
     # readOptions (sys.argv [1:])
     file_name = 'sample-mem-trace.txt'
     memtrace = genMemtrace (file_name)
-    sample_addr = memtrace [0][1]
+    sample_addr = genSampleAddr (file_name)
 
     cache_list = [Cache, FIFOCache, LRUCache, LFUCache]
     true_false_list = [True, False]
